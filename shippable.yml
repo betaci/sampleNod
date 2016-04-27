@@ -11,9 +11,9 @@ node_js:
   #- 5.0
 
 build:
-  pre_ci:
+  #pre_ci:
    # - docker build -t=quay.io/shippablequay/shiphitchcock1_auto_node .
-    - docker build -t=shiphitchcock1/auto_nod_push .
+   # - docker build -t=shiphitchcock1/auto_nod_push .
     #- docker build -t=shippabledocker/shiphitchcock1_auto_nod
 
   pre_ci_boot:
@@ -30,6 +30,7 @@ build:
     #- docker tag -f shiphitchcock1/auto_nod_push:latest quay.io/shippablequay/shiphitchcock1_auto_node
     #- docker push quay.io/shippablequay/shiphitchcock1_auto_node
     #- docker tag -f shiphitchcock1/auto_nod_push:latest shiphitchcock1/auto_nod_push:test
+    - docker build -t=shiphitchcock1/auto_nod_push:$BRANCH.$BUILD_NUMBER
     - docker push shiphitchcock1/auto_nod_push:$BRANCH.$BUILD_NUMBER
   #  - docker tag -f shiphitchcock1/auto_nod_multiplepush:latest shippabledocker/shiphitchcock1_auto_nod
    # - docker push shippabledocker/shiphitchcock1_auto_nod
