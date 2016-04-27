@@ -19,8 +19,8 @@ build:
     - ls -al
 
   post_ci:
-    - docker build -t=shiphitchcock1/auto_nod_push:$BRANCH.$BUILD_NUMBER
-    - docker push shiphitchcock1/auto_nod_push:$BRANCH.$BUILD_NUMBER
+    - docker build -t=shiphitchcock1/pyt-nod
+    - docker push shiphitchcock1/pyt-nod
     
 integrations:
   hub:
