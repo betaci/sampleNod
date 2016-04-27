@@ -6,16 +6,37 @@ node_js:
   - 0.12
   - 4.2.3
   - iojs-v1
- # - iojs-v2
-#  - iojs-v3
-  - 5.0
-
+  #- iojs-v2
+  #- iojs-v3
+  #- 5.0
 
 build:
-  ci:
-    - node --version
-    
+  pre_ci:
+   # - docker build -t=quay.io/shippablequay/shiphitchcock1_auto_node .
+    - docker build -t=shiphitchcock1/auto_nod_push .
+    #- docker build -t=shippabledocker/shiphitchcock1_auto_nod
+
   pre_ci_boot:
-    image_name: drydock/u12nod
-    image_tag: prod
-    pull: true  
+    image_name: shiphitchcock1/auto_nod_push
+    image_tag: latest
+    pull: false
+    options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
+
+  ci:
+    - ps -eax
+    - ls -al
+
+  post_ci:
+    #- docker tag -f shiphitchcock1/auto_nod_push:latest quay.io/shippablequay/shiphitchcock1_auto_node
+    #- docker push quay.io/shippablequay/shiphitchcock1_auto_node
+    #- docker tag -f shiphitchcock1/auto_nod_push:latest shiphitchcock1/auto_nod_push:test
+    - docker push shiphitchcock1/auto_nod_push:latest
+  #  - docker tag -f shiphitchcock1/auto_nod_multiplepush:latest shippabledocker/shiphitchcock1_auto_nod
+   # - docker push shippabledocker/shiphitchcock1_auto_nod
+    
+integrations:
+  hub:
+   # - integrationName: ship-quay
+   #   type: quay.io
+    - integrationName: shiphitchcock1-hub
+      type: docker
