@@ -7,11 +7,13 @@ node_js:
   #- 4.2.3
 
 build:
+  pre_ci:
+    - docker build -t=shiphitchcock1/samplenod .
 
   pre_ci_boot:
-    image_name: drydock/u14nod
-    image_tag: prod
-    pull: true
+    image_name: shiphitchcock1/samplenod
+    image_tag: latest
+    pull: false
     options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
 
   ci:
@@ -19,8 +21,7 @@ build:
     - ls -al
 
   post_ci:
-    - docker build -t=shiphitchcock1/pyt-nod
-    - docker push shiphitchcock1/pyt-nod
+    - docker push shiphitchcock1/samplenod
     
 integrations:
   hub:
